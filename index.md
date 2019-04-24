@@ -11,7 +11,7 @@ This workshop will be wholly based on reverse engineering through static analysi
 One of my biggest suggestions for folks looking to reverse engineer things, whatever they may be, is to try and build what you want to reverse. In the case of Android, you're lucky because there are so many free resources available to build your first application. If you've never built an Android application before, I suggest you start there. Pick any of the available tutorials and videos that spark your interest and get to building. When you understand *how* a developer builds something, it makes it much easier to understand how to reverse engineer it. 
 
 ## Fundamentals Review
-Great! You've built an app or learned basic Android app development principles. Here is a review of some of the important points. This []"Application Fundamentals" page](https://developer.android.com/guide/components/fundamentals.html) in the Android developers' docs is a great review.
+Great! You've built an app or learned basic Android app development principles. Here is a review of some of the important points. This ["Application Fundamentals" page](https://developer.android.com/guide/components/fundamentals.html) in the Android developers' docs is a great review.
 
 * Android applications are in the _APK file format_. APK is basically a ZIP file. (You can rename the file extension to .zip and use unzip to open and see its contents.)
 * APK Contents (Not exhaustive)
@@ -28,11 +28,11 @@ Great! You've built an app or learned basic Android app development principles. 
 
 ## Dalvik & Smali
 Most Android applications are written in Java. Kotlin is also supported and interoperable with Java. For ease, for the rest of this workshop, when I refer to "Java", you can assume that I mean "Java or Kotlin". Instead of the Java code being run in Java Virtual Machine (JVM) like desktop applications, in Android, the Java is compiled to the _Dalvik Executable (DEX) bytecode_ format. For earlier versions of Android, the bytecode was translated by the Dalvik virtual machine. For more recent versions of Android, the Android Runtime (ART) is used.
-</br>
+<br />
 If developers, write in Java and the code is compiled to DEX bytecode, to reverse engineer, we work the opposite direction. 
-</br>
+<br />
 ![Flowchart of Developer's process. Java to DEX bytecode](https://github.com/maddiestone/AndroidAppRE/images/DevelopersFlow.jpg)
-</br>
+<br />
 ![Flowchart of Reverse Engineer's process. DEX bytecode to SMALI to Decompiled Java](https://github.com/maddiestone/AndroidAppRE/images/ReversersFlow.jpg)
 
 Smali is the human readable version of Dalvik bytecode. Technically, Smali and baksmali are the name of the tools (assembler and disassembler, respectively), but in Android, we often use the term "Smali" to refer to instructions. If you've done reverse engineering or computer architecture on compiled C/C++ code. SMALI is like the assembly language: between the higher level source code and the bytecode. 
