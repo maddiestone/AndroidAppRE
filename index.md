@@ -31,9 +31,9 @@ Most Android applications are written in Java. Kotlin is also supported and inte
 <br />
 If developers, write in Java and the code is compiled to DEX bytecode, to reverse engineer, we work the opposite direction. 
 <br />
-![Flowchart of Developer's process. Java to DEX bytecode](https://github.com/maddiestone/AndroidAppRE/images/DevelopersFlow.jpg)
+![Flowchart of Developer's process. Java to DEX bytecode](https://github.com/maddiestone/AndroidAppRE/blob/master/images/DevelopersFlow.jpg)
 <br />
-![Flowchart of Reverse Engineer's process. DEX bytecode to SMALI to Decompiled Java](https://github.com/maddiestone/AndroidAppRE/images/ReversersFlow.jpg)
+![Flowchart of Reverse Engineer's process. DEX bytecode to SMALI to Decompiled Java](https://github.com/maddiestone/AndroidAppRE/blob/master/images/ReversersFlow.jpg)
 
 Smali is the human readable version of Dalvik bytecode. Technically, Smali and baksmali are the name of the tools (assembler and disassembler, respectively), but in Android, we often use the term "Smali" to refer to instructions. If you've done reverse engineering or computer architecture on compiled C/C++ code. SMALI is like the assembly language: between the higher level source code and the bytecode. 
 
@@ -43,7 +43,7 @@ public static void printHelloWorld() {
 	System.out.println("Hello World")
 }
 ```
-The Smali code would look like:
+The Smali code would be:
 ```
 .method public static printHelloWorld()V
 	.registers 2
