@@ -31,9 +31,9 @@ Most Android applications are written in Java. Kotlin is also supported and inte
 <br />
 If developers, write in Java and the code is compiled to DEX bytecode, to reverse engineer, we work the opposite direction. 
 <br />
-![Flowchart of Developer's process. Java to DEX bytecode](https://github.com/maddiestone/AndroidAppRE/blob/master/images/DevelopersFlow.jpg)
+![Flowchart of Developer's process. Java to DEX bytecode](images/DevelopersFlow.jpg)
 <br />
-![Flowchart of Reverse Engineer's process. DEX bytecode to SMALI to Decompiled Java](https://github.com/maddiestone/AndroidAppRE/blob/master/images/ReversersFlow.jpg)
+![Flowchart of Reverse Engineer's process. DEX bytecode to SMALI to Decompiled Java](images/ReversersFlow.jpg)
 
 Smali is the human readable version of Dalvik bytecode. Technically, Smali and baksmali are the name of the tools (assembler and disassembler, respectively), but in Android, we often use the term "Smali" to refer to instructions. If you've done reverse engineering or computer architecture on compiled C/C++ code. SMALI is like the assembly language: between the higher level source code and the bytecode. 
 
@@ -64,7 +64,7 @@ To get the Smali from DEX, you can use the baksmali tool (disassembler) availabl
 ## Application Entry Points
 One of the most important points of reverse engineering is knowing where to begin your analysis and entry points for code execution is an important part of that. 
 
-###Launcher Activity
+### Launcher Activity
 The launcher activity is what most people think of as the entry point to an Android application. The launcher activity is the activity that is started when a user clicks on the icon for an application. You can determine the launcher activity by looking at the application's manifest. The launcher activity will have the following MAIN and LAUNCHER intents listed.
 
 Keep in mind that not every application will have a launcher activity, especially apps without a UI. Examples of applications without a UI (and thus a launcher activity) are pre-installed applications that perform services in the background, such as voicemail. 
@@ -77,26 +77,40 @@ Keep in mind that not every application will have a launcher activity, especiall
 </activity>
 ```
 
-###Services
+### Services
 [Services](https://developer.android.com/guide/components/services) run in the background without a UI. There are a myriad of ways that they can be started and thus are an entry point for applications. The default way that a service can be started as an entry point to an application is through [Intents](https://developer.android.com/guide/components/intents-filters). 
 
 When the `startService` API is called to start a Service, the `onStart` method in the Service is executed. 
 
-###Broadcast Receivers
+### Broadcast Receivers
 Broadcasts can be thought of a messaging system and [broadcast receivers](https://developer.android.com/guide/components/broadcasts#receiving-broadcasts) are the listeners. If an application has registered a receiver for a specific broadcast, the code in that receiver is executed when the system sends the broadcast. There are 2 ways that an app can register a receiver: in the app's Manifest or dynamically registered in the app's code using the `registerReceiver()` API call. 
 
 In both cases, to register the receiver, the intent filters for the receiver are set. These intent filters are the broadcasts that should trigger the receiver.
 
 When the specific broadcasts are sent that the receiver is registered for are sent, `onReceive` in the BroadcastReceiver class is executed.
 
-###Exported Components (Services & Activities)
+### Exported Components (Services & Activities)
 Services and Activities can also be ["exported"](https://developer.android.com/guide/topics/manifest/service-element#exported), which allows other processes on the device to start the service or launch the activity. The components are exported by setting an element in the manifest like below. By default, `android:exported="false"` unless this element is set to true in the manifest or intent-filters are defined for the Activity or Service.
 ```
 <service android:name=".ExampleExportedService" android:exported="true"/>
 <activity android:name=".ExampleExportedActivity" android:exported="true"/>
 ````
 
-###Application Subclass
+### Application Subclass
 Android applications can define a subclass of [Application](https://developer.android.com/reference/android/app/Application). Applications can, but do not have to define a custom subclass of Application. If an Android app defines a Application subclass, this class is instantiated prior to any other class in the application. 
 
 If the `attachBaseContext` method is defined in the Application subclass, it is called first, before the `onCreate` method. 
+
+# Reverse Engineering Android Applications 
+
+## Starting Points for RE
+One of the main keys of reverse engineering, regardless of platform, that all reverse engineers need to do, is figure out where to start their analysis. As a reverse engineer, when you've decided that your next step to solve your problem/answer your question is to use static analysis, then you need to know where you want to begin the static analysis.
+
+Android applications can be very large and realistically, you likely won't be able to review every line of code. So where do you begin? My guidance when deciding where to begin doing static analysis is:
+
+1. **What is your goal?** In *most* cases, you are doing RE/static analysis to answer a specific question. Remember what that is and go back to it often. It's very easy to go down a rabbit hole of code that is not related to the problem you're tryng to solve.
+1. **API Calls** Most interesting behaviors that you may want to identify in Android, ultimately come down to a single, or a set of API calls. For example, let's say you're evaluating an application to see if it's doing [Premium SMS Fraud](https://developers.google.com/android/play-protect/phacategories#billing-fraud). Premium SMS Fraud means that an app is sending a premium SMS message without user consent. Therefore, to do the fraud, the app must send an SMS message. There's a finite number of API calls that will allow an application to send an SMS message. For example, `sendTextMessage`, `sendMultipartMessage`,`smsto:`. Therefore one of the key places to begin analysis, is to find the API calls that are required for the behavior you're interested in, and then search for them in your application. You can then begin your reversing around those API calls.
+1. **App Entry Points** In many cases, you're only interested in code that can be executed, not dead code, in the application. Therefore, starting at an application entry point (detailed in [this section](#application-entry-points)) is a good choice if you're not sure where else to start.
+1. **Decryption Methods** Java largely relies on strings to do many of its operations. For example, to send intents or call methods through reflection. If your application has no human readable strings, then it likely means its obfuscated or encrypted. A good starting point is to find if either "jumbled" strings or binary arrays are all passed to the same methods. If they are, those methods are likely the deobfuscation or decryption methods. 
+
+Now that we've reviewed the basics of Android applications, it's time to start reversing them! This section will be split into 1) reversing DEX and 2) reversing Android native code.
