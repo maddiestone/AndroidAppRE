@@ -43,6 +43,7 @@ public static void printHelloWorld() {
 	System.out.println("Hello World")
 }
 ```
+
 The Smali code would be:
 ```
 .method public static printHelloWorld()V
@@ -60,4 +61,42 @@ Most often when reverse engineering Android applications, you will not need to w
 
 To get the Smali from DEX, you can use the baksmali tool (disassembler) available at https://github.com/JesusFreke/smali/wiki. The smali tool will allow you to assemble smali back to DEX.
 
-	
+## Application Entry Points
+One of the most important points of reverse engineering is knowing where to begin your analysis and entry points for code execution is an important part of that. 
+
+###Launcher Activity
+The launcher activity is what most people think of as the entry point to an Android application. The launcher activity is the activity that is started when a user clicks on the icon for an application. You can determine the launcher activity by looking at the application's manifest. The launcher activity will have the following MAIN and LAUNCHER intents listed.
+
+Keep in mind that not every application will have a launcher activity, especially apps without a UI. Examples of applications without a UI (and thus a launcher activity) are pre-installed applications that perform services in the background, such as voicemail. 
+```
+<activity android:name=".LauncherActivity">
+	<intent-filter>
+    	<action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+</activity>
+```
+
+###Services
+[Services](https://developer.android.com/guide/components/services) run in the background without a UI. There are a myriad of ways that they can be started and thus are an entry point for applications. The default way that a service can be started as an entry point to an application is through [Intents](https://developer.android.com/guide/components/intents-filters). 
+
+When the `startService` API is called to start a Service, the `onStart` method in the Service is executed. 
+
+###Broadcast Receivers
+Broadcasts can be thought of a messaging system and [broadcast receivers](https://developer.android.com/guide/components/broadcasts#receiving-broadcasts) are the listeners. If an application has registered a receiver for a specific broadcast, the code in that receiver is executed when the system sends the broadcast. There are 2 ways that an app can register a receiver: in the app's Manifest or dynamically registered in the app's code using the `registerReceiver()` API call. 
+
+In both cases, to register the receiver, the intent filters for the receiver are set. These intent filters are the broadcasts that should trigger the receiver.
+
+When the specific broadcasts are sent that the receiver is registered for are sent, `onReceive` in the BroadcastReceiver class is executed.
+
+###Exported Components (Services & Activities)
+Services and Activities can also be ["exported"](https://developer.android.com/guide/topics/manifest/service-element#exported), which allows other processes on the device to start the service or launch the activity. The components are exported by setting an element in the manifest like below. By default, `android:exported="false"` unless this element is set to true in the manifest or intent-filters are defined for the Activity or Service.
+```
+<service android:name=".ExampleExportedService" android:exported="true"/>
+<activity android:name=".ExampleExportedActivity" android:exported="true"/>
+````
+
+###Application Subclass
+Android applications can define a subclass of [Application](https://developer.android.com/reference/android/app/Application). Applications can, but do not have to define a custom subclass of Application. If an Android app defines a Application subclass, this class is instantiated prior to any other class in the application. 
+
+If the `attachBaseContext` method is defined in the Application subclass, it is called first, before the `onCreate` method. 
