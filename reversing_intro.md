@@ -15,24 +15,24 @@ Android applications can be very large and realistically, you likely won't be ab
 
 In Exercise #1, we're going to practice coming up with the classes where we would begin our RE analysis. Your goal is to come up with a class or classes that you think would be a good place to begin your analysis. The sample is the ThaiCamera.apk. You can find this sample in the VM at `~/samples/ThaiCamera.apk`. The SHA256 digest of this sample is 55da412157e93153e419c3385ebcd5335bd0d0c3f77a75e2d2413dd128270be2.
 
-*Goal*
+### Goal
 The goal of this exercise is to:
 
 1. Learn to use jadx for reverse engineering APKs
 1. Practice identifying class(es) that would be good starting points to begin your revering
 
-*Context*
+### Exercise Context
 You are a malware analyst for Android applications. You are concerned that this sample maybe doing premium SMS fraud, meaning that it sends an SMS to a premium phone number without disclosure & user consent.
 
 ### Instructions
 
 1. Start jadx by opening the terminal in the VM and running the `jadx-gui` command in the terminal.
-1. Open ThaiCamera.apk in the jadx GUI. It's in the VM's path at `~/samples/ThaiCamera.apk`. When you open the application in jadx, you will see the following. Under the Source Code heading, the packages (namespaces for the Java classes) included in the application. [Screenshot of jadx when first opening an APK](images/Ex1.OpenInJadx.png)
+1. Open ThaiCamera.apk in the jadx GUI. It's in the VM's path at `~/samples/ThaiCamera.apk`. When you open the application in jadx, you will see the following. Under the Source Code heading, the packages (namespaces for the Java classes) included in the application. ![Screenshot of jadx when first opening an APK](images/Ex1.OpenInJadx.png)
 1. By clicking on the expansion tab of "Resources", you can see the contents of the APK. Some of the most interesting are the Manifest (`AndroidManifest.xml`), `classes.dex` (contains the DEX bytecode that is decompiled under the "Source Code" tab), and the `assets/` folder which contains any other files the APK may need to run. 
 1. Open AndroidManifest.xml and identify any of the application entry points described in the [Application Entry Points](app_fundamentals.md#application-entry-points) section.
 1. Using the information gathered in the previous step and the [Starting Points for RE](#starting-points-for-re) section above. Decide on a class or classes, that you think would be classes that you'd begin analyzing when you start your reversing.
 
 [//]: # TODO write answer pages for the different steps.
 
-[**NEXT** > 4. Reverse Engineering Android Apps - DEX Bytecode](reversing-dex.md)
+[**NEXT** > 4. Reverse Engineering Android Apps - DEX Bytecode](reversing_dex.md)
 

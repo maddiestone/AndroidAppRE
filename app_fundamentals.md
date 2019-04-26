@@ -94,22 +94,5 @@ Android applications can define a subclass of [Application](https://developer.an
 
 If the `attachBaseContext` method is defined in the Application subclass, it is called first, before the `onCreate` method. 
 
-# Reverse Engineering Android Applications 
-Now that we've reviewed the basics of Android applications, it's time to start reversing them! This section will be split into a couple of different parts:
-
-* Where do we [begin our static analysis](#starting-points-for-re) when we want to RE an Android applications
-* Reversing the DEX code of Android apps
-* Reversing native libraries (C/C++ compiled code) included in Android apps
-
-## Starting Points for RE
-One of the main keys of reverse engineering, regardless of platform, that all reverse engineers need to do, is figure out where to start their analysis. As a reverse engineer, when you've decided that your next step to solve your problem/answer your question is to use static analysis, then you need to know where you want to begin the static analysis.
-
-Android applications can be very large and realistically, you likely won't be able to review every line of code. So where do you begin? My guidance when deciding where to begin doing static analysis is:
-
-1. **What is your goal?** In *most* cases, you are doing RE/static analysis to answer a specific question. Remember what that is and go back to it often. It's very easy to go down a rabbit hole of code that is not related to the problem you're tryng to solve.
-1. **API Calls** Most interesting behaviors that you may want to identify in Android, ultimately come down to a single, or a set of API calls. For example, let's say you're evaluating an application to see if it's doing [Premium SMS Fraud](https://developers.google.com/android/play-protect/phacategories#billing-fraud). Premium SMS Fraud means that an app is sending a premium SMS message without user consent. Therefore, to do the fraud, the app must send an SMS message. There's a finite number of API calls that will allow an application to send an SMS message. For example, `sendTextMessage`, `sendMultipartMessage`,`smsto:`. Therefore one of the key places to begin analysis, is to find the API calls that are required for the behavior you're interested in, and then search for them in your application. You can then begin your reversing around those API calls.
-1. **App Entry Points** In many cases, you're only interested in code that can be executed, not dead code, in the application. Therefore, starting at an application entry point (detailed in [this section](#application-entry-points)) is a good choice if you're not sure where else to start.
-1. **Decryption Methods** Java largely relies on strings to do many of its operations. For example, to send intents or call methods through reflection. If your application has no human readable strings, then it likely means its obfuscated or encrypted. A good starting point is to find if either "jumbled" strings or binary arrays are all passed to the same methods. If they are, those methods are likely the deobfuscation or decryption methods. 
-
 
 [**NEXT** > 3. Getting Started with Reversing Android Apps](reversing_intro.md)
