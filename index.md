@@ -4,7 +4,11 @@ Welcome to Android<sup>TM</sup> App Reverse Engineering 101! This workshop's goa
 This workshop will be wholly based on reverse engineering through static analysis, or analyzing and understanding an application by examining its code. I won't be covering dynamic analysis where an analyst runs an application and understands the application by executing it, debugging it, etc. Why? Static analysis tends to be a less approachable skill for people to pick up on their own, so I want to help you do it! (And I really love static analysis)
 
 ## Environment
-All of the exercises in this workshop can be done in the virtual machine (VM) that is available here. The VM is an Ubuntu 18.04 64-bit image. The username is `AndroidAppRE` and the password is `android`. The VM has the following tools installed:
+All of the exercises in this workshop can be done in the virtual machine (VM) that is available here. 
+* [Virtual Box VM](https://drive.google.com/file/d/16Bz75sQY1jnMooiJmsmqHcpQxLGbmmzT/view?usp=sharing)
+* [.ova for VMWare]()
+
+The VM is an Ubuntu 18.04 64-bit image. The username is `AndroidAppRE` and the password is `android`. The VM has the following tools installed:
 
 * [jadx](https://github.com/skylot/jadx) - Android decompiler. We load the APKs into jadx. And are able to analyze the DEX bytecode using jadx.
 * [Ghidra](https://ghidra-sre.org/) - Software reverse engineering tool. We use its ARM disassembler/decompiler functionality in the exercises to statically analyze the native libraries. 
@@ -12,11 +16,12 @@ All of the exercises in this workshop can be done in the virtual machine (VM) th
 ## Table of Contents
 
 1. [Introduction](#1-introduction)
-1. [Android Application Fundamentals](app_fundamentals.md)
-1. [Getting Started with Reversing Android Apps](reversing_intro.md)
+1. [Android Application Fundamentals](app_fundamentals.html)
+1. [Getting Started with Reversing Android Apps](reversing_intro.html)
     * [Exercise 1](reversing_intro.html#exercise-1---beginning-re-with-jadx)
-1. [Reverse Engineering Android Apps - DEX Bytecode](reversing-dex.md)
-1. [Reverse Engineering Android Apps - Native Libraries](reversing-native-libs.md)
+1. [Reverse Engineering Android Apps - DEX Bytecode](reversing-dex.html)
+	* [Exercise 2](reversing_dex.html#exercise-2---reverse-engineer-the-dex)
+1. [Reverse Engineering Android Apps - Native Libraries](reversing_native_libs.html)
 
 ## Acknowledgements
 
@@ -26,5 +31,5 @@ _"The Android robot used as the logo is reproduced or modified from work created
 
 _Android is a trademark of Google LLC._
 
-[**NEXT** > 2. Android Application Fundamentals](app_fundamentals.md)
+[**NEXT** > 2. Android Application Fundamentals](app_fundamentals.html)
 

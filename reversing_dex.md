@@ -12,7 +12,6 @@ The goal of this exercise is to: Reverse engineer our 1st Android application (D
 
 1. Learn to analyze the Java decompilation of the DEX bytecode in jadx to understand what the Android application is doing. 
 1. Experience 1st hand how Android malware analysts apply reverse engineering to their context
-1. 
 
 ### Exercise Context
 You are a malware analyst for Android applications. You are concerned that this sample maybe doing premium SMS fraud, meaning that it sends an SMS to a premium phone number without disclosure & user consent. In order to flag as malware, you need to determine if the Android application is:
@@ -31,4 +30,4 @@ You are a malware analyst for Android applications. You are concerned that this 
 [//]: # TODO write answer pages for the different steps.
 
 
-[**NEXT** > 4. Reverse Engineering Android Apps - DEX Bytecode](reversing_dex.md)
+[**NEXT** > 5. Reverse Engineering Android Apps - Native Libraries](reversing_native_libs.html)

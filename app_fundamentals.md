@@ -95,4 +95,4 @@ Android applications can define a subclass of [Application](https://developer.an
 If the `attachBaseContext` method is defined in the Application subclass, it is called first, before the `onCreate` method. 
 
 
-[**NEXT** > 3. Getting Started with Reversing Android Apps](reversing_intro.md)
+[**NEXT** > 3. Getting Started with Reversing Android Apps](reversing_intro.html)
