@@ -1,3 +1,18 @@
+#### Table of Contents
+
+1. [Introduction](index.html)
+1. [Android Application Fundamentals](app_fundamentals.html)
+1. [Getting Started with Reversing Android Apps](reversing_intro.html)
+    * [Exercise 1](reversing_intro.html#exercise-1---beginning-re-with-jadx)
+1. [Reverse Engineering Android Apps - DEX Bytecode](reversing-dex.html)
+	* [Exercise 2](reversing_dex.html#exercise-2---reverse-engineer-the-dex)
+	* *Execises 3 & 4 Coming Soon*
+1. [Reverse Engineering Android Apps - Native Libraries](reversing_native_libs.html)
+	* [Exercise 5](reversing_native_libs.html#exercise-5---find-the-address-of-the-native-function)
+	* [Exercise 6](reversing_native_libs.html#exercise-6---find-and-reverse-the-native-function)
+
+
+
 # 5. Reverse Engineering Android Apps - Native Libraries
 
 Android applications can contain compiled, native libraries. Native libraries are code that the developer wrote and then compiled for a specific computer architecture. Most often, this means code that is written in C or C++. The benign, or legitimate, reasons a developer may do this is for mathematically intensive or time sensitive operations, such as graphics libraries. Malware developers have begun moving to native code because reverse engineering compiled binaries tends to be a less common skillset than analyzing DEX bytecode. This is largerly due to DEX bytecode can be decompiled to Java whereas native, compiled code, often must be analyzed as assembly.
