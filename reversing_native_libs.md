@@ -2,8 +2,6 @@
 
 Android applications can contain compiled, native libraries. Native libraries are code that the developer wrote and then compiled for a specific computer architecture. Most often, this means code that is written in C or C++. The benign, or legitimate, reasons a developer may do this is for mathematically intensive or time sensitive operations, such as graphics libraries. Malware developers have begun moving to native code because reverse engineering compiled binaries tends to be a less common skillset than analyzing DEX bytecode. This is largerly due to DEX bytecode can be decompiled to Java whereas native, compiled code, often must be analyzed as assembly.
 
-## Overview
-
 # Goal
 The goal of this section is not to teach you assembly (ASM) or how to reverse engineer compiled code more generally, but instead how to apply the more general binary reverse engineering skills, specifically to Android. Because the goal of this workshop is not to teach you the ASM architectures, all exercises will include an ARM *and* an x86 version of the library to be analyzed so that each person can choose the architecture that they are more comfortable with. 
 
@@ -110,18 +108,18 @@ The `JNINativeMethod` struct requires a string of the Java-declared native metho
 #### Method Signature
 The `JNINativeMethod` struct requires the method signature. A method signature states the types of the arguments that the method takes and the type of what it returns. This link documents [JNI Type Signatures](https://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/types.html) in the "Type Signatures" section.
 
-Z: boolean
-B: byte
-C: char
-S: short
-I: int
-J: long
-F: float
-D: double
-L fully-qualified-class ; :fully-qualified-class
-[ type: type[]
-( arg-types ) ret-type: method type
-V: void
+* Z: boolean
+* B: byte
+* C: char
+* S: short
+* I: int
+* J: long
+* F: float
+* D: double
+* L fully-qualified-class ; :fully-qualified-class
+* [ type: type[]
+* ( arg-types ) ret-type: method type
+* V: void
 
 For the native method
 ```
@@ -142,6 +140,7 @@ In Exercise #5 we're going to learn to load native libraries in a disassembler a
 
 #### Goal
 The goal of this exercise is to:
+
 1. Identify declared native methods in the DEX bytecode
 1. Determine what native libraries are loaded (and thus where the native methods may be implemented)
 1. Extract the native library from the APK
@@ -172,19 +171,20 @@ From the Android [JNI Tips](https://developer.android.com/training/articles/perf
 > The C declarations of JNIEnv and JavaVM are different from the C++ declarations. The "jni.h" include file provides different typedefs depending on whether it's included into C or C++. For this reason it's a bad idea to include JNIEnv arguments in header files included by both languages. (Put another way: if your header file requires #ifdef __cplusplus, you may have to do some extra work if anything in that header refers to JNIEnv.)
 
 Here are some commonly used functions (and their offsets in JNIEnv):
-JNIEnv + 0x18:		jclass      (\*FindClass)(JNIEnv*, const char*);
-JNIEnv + 0x34: 		jint        (\*Throw)(JNIEnv*, jthrowable);
-JNIEnv + 0x70:		jobject     (\*NewObject)(JNIEnv*, jclass, jmethodID, ...);
-JNIEnv + 0x84: 		jobject     (\*NewObject)(JNIEnv*, jclass, jmethodID, ...);
-								Call<type>Method()
-JNIEnv + 0x28C: 	jstring     (\*NewString)(JNIEnv*, const jchar*, jsize);
-JNIEnv + 0x35C:		jint        (\*RegisterNatives)(JNIEnv*, jclass, const JNINativeMethod*, jint);
+* JNIEnv + 0x18:		jclass      (\*FindClass)(JNIEnv*, const char*);
+* JNIEnv + 0x34: 		jint        (\*Throw)(JNIEnv*, jthrowable);
+* JNIEnv + 0x70:		jobject     (\*NewObject)(JNIEnv*, jclass, jmethodID, ...);
+* JNIEnv + 0x84: 		jobject     (\*NewObject)(JNIEnv*, jclass, jmethodID, ...);
+* JNIEnv + 0x28C: 		jstring     (\*NewString)(JNIEnv*, const jchar*, jsize);
+* JNIEnv + 0x35C:		jint        (\*RegisterNatives)(JNIEnv*, jclass, const JNINativeMethod*, jint);
 
 When analyzing Android native libraries, the presence of JNIEnv means that:
-1) For native functions, the arguments will be shifted at least by 1 since JNIEnv* is the first argument. *Note: that for non-static native methods, the arguments will actually be shifted by two spots. The object that the native method is being called on is passed as the second argument*
-2) You will often see indirect branches in the disassembly because the code is adding the offset to the JNIEnv* pointer, dereferencing to get the function pointer at that location, then branching to the function.
+
+1. For native functions, the arguments will be shifted at least by 1 since JNIEnv* is the first argument. *Note: that for non-static native methods, the arguments will actually be shifted by two spots. The object that the native method is being called on is passed as the second argument*
+2. You will often see indirect branches in the disassembly because the code is adding the offset to the JNIEnv* pointer, dereferencing to get the function pointer at that location, then branching to the function.
 
 Here is a [spreadsheet](https://docs.google.com/spreadsheets/d/1yqjFaY7mqyVIDs5jNjGLT-G8pUaRATzHWGFUgpdJRq8/edit?usp=sharing) of the C-implementation of the JNIEnv struct to know what function pointers are at the different offsets. 
+
 ### Exercise #6 - Find and Reverse the Native Function
 We are going to point all of our previous skills together: identifying starting points for RE, reversing DEX, and reversing native code to analyze an application that may have moved its harmful behaviors in native code.
 
