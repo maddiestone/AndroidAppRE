@@ -4,7 +4,7 @@
 1. [Android Application Fundamentals](app_fundamentals.html)
 1. [Getting Started with Reversing Android Apps](reversing_intro.html)
     * [Exercise 1](reversing_intro.html#exercise-1---beginning-re-with-jadx)
-1. [Reverse Engineering Android Apps - DEX Bytecode](reversing-dex.html)
+1. [Reverse Engineering Android Apps - DEX Bytecode](reversing_dex.html)
 	* [Exercise 2](reversing_dex.html#exercise-2---reverse-engineer-the-dex)
 	* *Execises 3 & 4 Coming Soon*
 1. [Reverse Engineering Android Apps - Native Libraries](reversing_native_libs.html)
