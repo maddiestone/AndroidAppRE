@@ -48,7 +48,15 @@ Because native code is compiled for specific CPUs, if a developer wants their ap
 | ARM64 | `lib/arm64-v8a/libcalc.so` |
 
 ## Loading the Library
-Before an Android app can call and execute any code that is implemented in a native library, the application (Java code) must load the library into memory. There are two different API calls that will do this: `System.loadLibrary("calc")` or `System.load("lib/armeabi/libcalc.so")`. The difference between the two api calls is that `loadLibrary` only take takes the library short name as an argument (ie. libcalc.so = "calc" & libinit.so = "init") and the system will correctly determine the architecture it's currently running on and thus the correct file to use. On the other hand, `load` requires the full path to the library. This means that the app developer has to determine the architecture and thus the correct library file to load themselves. 
+Before an Android app can call and execute any code that is implemented in a native library, the application (Java code) must load the library into memory. There are two different API calls that will do this: 
+```
+System.loadLibrary("calc")
+``` 
+or 
+```
+System.load("lib/armeabi/libcalc.so")
+``` 
+The difference between the two api calls is that `loadLibrary` only take takes the library short name as an argument (ie. libcalc.so = "calc" & libinit.so = "init") and the system will correctly determine the architecture it's currently running on and thus the correct file to use. On the other hand, `load` requires the full path to the library. This means that the app developer has to determine the architecture and thus the correct library file to load themselves. 
 
 When either of these two (`loadLibrary` or `load`) APIs are called by the Java code, the native library that is passed as an argument executes its `JNI_OnLoad` if it was implemented in the native library. 
 
@@ -130,9 +138,13 @@ The type signature is
 (I)Ljava/lang/String;
 ```
 
-Here's another example of a native method and its signature.
+Here's another example of a native method and its signature. For the following is the method declaration
 ```
-long f (int n, String s, int[] arr); → (ILjava/lang/String;[I)J
+public native long f (int n, String s, int[] arr); 
+```
+It has the type signature:
+```
+(ILjava/lang/String;[I)J
 ```
 
 ### Exercise #5 - Find the Address of the Native Function
@@ -162,6 +174,7 @@ The goal of this exercise is to:
 1. Using the linking information above, identify the function in the native library that is executed when the Java-declared native method is called.
 
 [//]: # TODO write answer pages for the different steps.
+*Coming Soon: Answer video*
 
 ## Reversing Android Native Libraries Code - JNIEnv
 
@@ -185,8 +198,16 @@ When analyzing Android native libraries, the presence of JNIEnv means that:
 
 Here is a [spreadsheet](https://docs.google.com/spreadsheets/d/1yqjFaY7mqyVIDs5jNjGLT-G8pUaRATzHWGFUgpdJRq8/edit?usp=sharing) of the C-implementation of the JNIEnv struct to know what function pointers are at the different offsets. 
 
+In practice, in the disassembly this shows as many different branches to indirect addresses rather than the direct function call. The image below shows one of these indirect function calls. The highlighted line in the disassembly shows a `blx r3`. As reversers, we need to figure out what r3 is. It's not shown in the screenshot, but at the beginning of this function, `r0` was moved into `r5`. Therefore, `r5` is `JNIEnv*`. On line 0x12498 we see `r3 = [r5]`. Now `r3` is `JNIEnv` (no *). 
+
+On line 0x1249e, we add 0x18 to `r3` and dereference it. This means that `r3` now equals whatever function pointer is at offset 0x18 in JNIEnv. We can find out by looking at the spreadsheet. `[JNIEnv + 0x18] = Pointer to the FindClass method` 
+
+Therefore `blx r3` on line 0x124a4 is calling `FindClass`. We can look up information about `FindClass` (and all the other functions in JNIEnv) in the JNIFunctions documentation [here](https://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/functions.html).
+
+![Screenshot of Disassembly Calling a function from JNIEnv](images/JNIcall.png) 
+
 ### Exercise #6 - Find and Reverse the Native Function
-We are going to point all of our previous skills together: identifying starting points for RE, reversing DEX, and reversing native code to analyze an application that may have moved its harmful behaviors in native code.
+We are going to point all of our previous skills together: identifying starting points for RE, reversing DEX, and reversing native code to analyze an application that may have moved its harmful behaviors in native code. The sample is `~/samples/HDWallpaper.apk`.
 
 #### Goal
 The goal of this exercise is to put all of our Android reversing skills together to analyze an app as a whole: its DEX and native code.
@@ -202,6 +223,7 @@ You are a malware analyst for Android applications. You are concerned that this 
 #### Instructions
 Go on and reverse! 
 
+*Coming Soon: More Ghidra instructions & screenshots & answer/walk through video.*
 [//]: # TODO write answer pages for the different steps.
 
 

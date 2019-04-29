@@ -33,6 +33,7 @@ You are a malware analyst for Android applications. You are concerned that this 
 1. Using the information gathered in the previous step and the [Starting Points for RE](#starting-points-for-re) section above. Decide on a class or classes, that you think would be classes that you'd begin analyzing when you start your reversing.
 
 [//]: # TODO write answer pages for the different steps.
+*Coming Soon: Answer videos*
 
 [**NEXT** > 4. Reverse Engineering Android Apps - DEX Bytecode](reversing_dex.html)
 
