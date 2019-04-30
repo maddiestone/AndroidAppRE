@@ -30,7 +30,7 @@ The VM is an Ubuntu 18.04 64-bit image. The username is `AndroidAppRE` and the p
 
 ## Acknowledgements
 
-This workshop was modeled after the format used my Amanda Rousseau's ([@malwareunicorn](https://twitter/com/malwareunicorn)) RE 101 workshop which she released using GitHub pages. Thanks, Amanda, for the inspiration!
+This workshop was modeled after the format used my Amanda Rousseau's ([@malwareunicorn](https://twitter.com/malwareunicorn)) RE 101 workshop which she released using GitHub pages. Thanks, Amanda, for the inspiration!
 
 _"The Android robot used as the logo is reproduced or modified from work created and shared by Google and used according to terms described in the Creative Commons 3.0 Attribution License."_
 
