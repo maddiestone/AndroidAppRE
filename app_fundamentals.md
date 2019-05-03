@@ -6,7 +6,7 @@
     * [Exercise 1](reversing_intro.html#exercise-1---beginning-re-with-jadx)
 1. [Reverse Engineering Android Apps - DEX Bytecode](reversing_dex.html)
 	* [Exercise 2](reversing_dex.html#exercise-2---reverse-engineer-the-dex)
-	* *Execises 3 & 4 Coming Soon*
+	* *Exercises 3 & 4 Coming Soon*
 1. [Reverse Engineering Android Apps - Native Libraries](reversing_native_libs.html)
 	* [Exercise 5](reversing_native_libs.html#exercise-5---find-the-address-of-the-native-function)
 	* [Exercise 6](reversing_native_libs.html#exercise-6---find-and-reverse-the-native-function)
