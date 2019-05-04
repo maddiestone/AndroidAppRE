@@ -6,7 +6,7 @@
     * [Exercise 1](reversing_intro.html#exercise-1---beginning-re-with-jadx)
 1. [Reverse Engineering Android Apps - DEX Bytecode](reversing_dex.html)
 	* [Exercise 2](reversing_dex.html#exercise-2---reverse-engineer-the-dex)
-	* *Execises 3 & 4 Coming Soon*
+	* *Exercises 3 & 4 Coming Soon*
 1. [Reverse Engineering Android Apps - Native Libraries](reversing_native_libs.html)
 	* [Exercise 5](reversing_native_libs.html#exercise-5---find-the-address-of-the-native-function)
 	* [Exercise 6](reversing_native_libs.html#exercise-6---find-and-reverse-the-native-function)
@@ -15,7 +15,7 @@
 
 # 5. Reverse Engineering Android Apps - Native Libraries
 
-Android applications can contain compiled, native libraries. Native libraries are code that the developer wrote and then compiled for a specific computer architecture. Most often, this means code that is written in C or C++. The benign, or legitimate, reasons a developer may do this is for mathematically intensive or time sensitive operations, such as graphics libraries. Malware developers have begun moving to native code because reverse engineering compiled binaries tends to be a less common skillset than analyzing DEX bytecode. This is largerly due to DEX bytecode can be decompiled to Java whereas native, compiled code, often must be analyzed as assembly.
+Android applications can contain compiled, native libraries. Native libraries are code that the developer wrote and then compiled for a specific computer architecture. Most often, this means code that is written in C or C++. The benign, or legitimate, reasons a developer may do this is for mathematically intensive or time sensitive operations, such as graphics libraries. Malware developers have begun moving to native code because reverse engineering compiled binaries tends to be a less common skillset than analyzing DEX bytecode. This is largely due to DEX bytecode can be decompiled to Java whereas native, compiled code, often must be analyzed as assembly.
 
 # Goal
 The goal of this section is not to teach you assembly (ASM) or how to reverse engineer compiled code more generally, but instead how to apply the more general binary reverse engineering skills, specifically to Android. Because the goal of this workshop is not to teach you the ASM architectures, all exercises will include an ARM *and* an x86 version of the library to be analyzed so that each person can choose the architecture that they are more comfortable with. 
@@ -91,7 +91,7 @@ There are 2 different ways to do this pairing, or linking:
 1. Static Linking using the `RegisterNatives` API call
 
 ### Dynamic Linking 
-In order to link, or pair, the Java declared native method and the function in the native library dynamically, the developer names the method and the function accoring to the specs such that the JNI system can dynamically do the linking.
+In order to link, or pair, the Java declared native method and the function in the native library dynamically, the developer names the method and the function according to the specs such that the JNI system can dynamically do the linking.
 
 According to the spec, the developer would name the function as follow for the system to be able to dynamically link the native method and function. A native method name is concatenated from the following components:
 
