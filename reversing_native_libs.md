@@ -226,7 +226,7 @@ Therefore `blx r3` on line 0x124a4 is calling `FindClass`. We can look up inform
 
 ![Screenshot of Disassembly Calling a function from JNIEnv](images/JNIcall.png) 
 
-Thankfully, there's a way to get the JNI function without doing all of this manually! In both the Ghidra and IDA Pro decompilers you can re-type the first argument in JNI functions to `JNIEnv *` type and it will automatically identify the JNI Functions being called. In IDA Pro, this work out of the box. In Ghidra, you have to load the JNI types (either the jni.h file or a Ghidra Data Types archive of the jni.h file) first. For ease, we will load the JNI types from the Ghidra Data Types archive (gdt) produced by Aryx and available [here](https://github.com/Ayrx/JNIAnalyzer/blob/master/JNIAnalyzer/data/jni_all.gdt). For ease, this file is available in the VM at `~/jni_all.gdt`.
+Thankfully, there's a way to get the JNI function without doing all of this manually! In both the Ghidra and IDA Pro decompilers you can re-type the first argument in JNI functions to `JNIEnv *` type and it will automatically identify the JNI Functions being called. In IDA Pro, this work out of the box. In Ghidra, you have to load the JNI types (either the jni.h file or a Ghidra Data Types archive of the jni.h file) first. For ease, we will load the JNI types from the Ghidra Data Types archive (gdt) produced by Ayrx and available [here](https://github.com/Ayrx/JNIAnalyzer/blob/master/JNIAnalyzer/data/jni_all.gdt). For ease, this file is available in the VM at `~/jni_all.gdt`.
 
 To load it for use in Ghidra, in the Data Type Manager Window, click on the down arrow in the right-hand corner and select "Open File Archive". 
 
