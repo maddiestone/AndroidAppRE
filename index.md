@@ -7,8 +7,8 @@ This workshop will be wholly based on reverse engineering through static analysi
 
 ## Environment
 All of the exercises in this workshop can be done in the virtual machine (VM) that is available here. 
-* [Virtual Box VM](https://drive.google.com/file/d/16Bz75sQY1jnMooiJmsmqHcpQxLGbmmzT/view?usp=sharing)
-* [.ova for VMWare](https://drive.google.com/file/d/1LcOLY7IGikfScxn55iOZv2gs4m0UZgL4/view?usp=sharing)
+* [Virtual Box VM](https://drive.google.com/file/d/1yP84Rrpe42slXliVAsHQNYeXlqAJfKgO/view?usp=sharing)
+* [.ova for VMWare](https://drive.google.com/file/d/1Og-mHwpIxX-ghxwJf_g7bS7Vt1gU9gsm/view?usp=sharing)
 
 The VM is an Ubuntu 18.04 64-bit image. The username is `AndroidAppRE` and the password is `android`. The VM has the following tools installed:
 
@@ -17,16 +17,20 @@ The VM is an Ubuntu 18.04 64-bit image. The username is `AndroidAppRE` and the p
 
 ## Table of Contents
 
-1. [Introduction](#1-introduction)
+1. [Introduction](index.html)
 1. [Android Application Fundamentals](app_fundamentals.html)
 1. [Getting Started with Reversing Android Apps](reversing_intro.html)
     * [Exercise 1](reversing_intro.html#exercise-1---beginning-re-with-jadx)
 1. [Reverse Engineering Android Apps - DEX Bytecode](reversing_dex.html)
 	* [Exercise 2](reversing_dex.html#exercise-2---reverse-engineer-the-dex)
-	* *Exercises 3 & 4 Coming Soon*
+	* [Exercise 3](reversing_dex.html#exercise-3---reverse-engineer-the-dex-to-identify-the-vuln)
+	* [Exercise 4](reversing_dex.html#exercise-4---arbitrary-command-execution-take-2)
 1. [Reverse Engineering Android Apps - Native Libraries](reversing_native_libs.html)
 	* [Exercise 5](reversing_native_libs.html#exercise-5---find-the-address-of-the-native-function)
 	* [Exercise 6](reversing_native_libs.html#exercise-6---find-and-reverse-the-native-function)
+1. [Reverse Engineering Android Apps - Obfuscation](obfuscation.html)
+	* [Exercise 7](obfuscation.html#exercise-7---string-deobfuscation)
+1. [Conclusion](conclusion.html)
 
 ## Acknowledgements
 

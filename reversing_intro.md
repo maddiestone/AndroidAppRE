@@ -6,10 +6,14 @@
     * [Exercise 1](reversing_intro.html#exercise-1---beginning-re-with-jadx)
 1. [Reverse Engineering Android Apps - DEX Bytecode](reversing_dex.html)
 	* [Exercise 2](reversing_dex.html#exercise-2---reverse-engineer-the-dex)
-	* *Exercises 3 & 4 Coming Soon*
+	* [Exercise 3](reversing_dex.html#exercise-3---reverse-engineer-the-dex-to-identify-the-vuln)
+	* [Exercise 4](reversing_dex.html#exercise-4---arbitrary-command-execution-take-2)
 1. [Reverse Engineering Android Apps - Native Libraries](reversing_native_libs.html)
 	* [Exercise 5](reversing_native_libs.html#exercise-5---find-the-address-of-the-native-function)
 	* [Exercise 6](reversing_native_libs.html#exercise-6---find-and-reverse-the-native-function)
+1. [Reverse Engineering Android Apps - Obfuscation](obfuscation.html)
+	* [Exercise 7](obfuscation.html#exercise-7---string-deobfuscation)
+1. [Conclusion](conclusion.html)
 
 
 
@@ -47,8 +51,11 @@ You are a malware analyst for Android applications. You are concerned that this 
 1. Open AndroidManifest.xml and identify any of the application entry points described in the [Application Entry Points](app_fundamentals.html#application-entry-points) section.
 1. Using the information gathered in the previous step and the [Starting Points for RE](#starting-points-for-re) section above. Decide on a class or classes, that you think would be classes that you'd begin analyzing when you start your reversing.
 
-[//]: # TODO write answer pages for the different steps.
-*Coming Soon: Answer videos*
+### Solution
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/XvocjlxuccI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+There is no single right answer because the goal is to get into the habit of making deliberate choices of where to begin our reverse engineering analysis. One suggestion is to look for calls to the Android APIs that allow you to programmatically send a text message such as `sendTextMessage` or `sendMultipartMessage`. Another example could be looking for strings related to "SMS". 
 
 [**NEXT** > 4. Reverse Engineering Android Apps - DEX Bytecode](reversing_dex.html)
 

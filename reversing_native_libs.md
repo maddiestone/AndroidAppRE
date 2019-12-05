@@ -6,10 +6,14 @@
     * [Exercise 1](reversing_intro.html#exercise-1---beginning-re-with-jadx)
 1. [Reverse Engineering Android Apps - DEX Bytecode](reversing_dex.html)
 	* [Exercise 2](reversing_dex.html#exercise-2---reverse-engineer-the-dex)
-	* *Exercises 3 & 4 Coming Soon*
+	* [Exercise 3](reversing_dex.html#exercise-3---reverse-engineer-the-dex-to-identify-the-vuln)
+	* [Exercise 4](reversing_dex.html#exercise-4---arbitrary-command-execution-take-2)
 1. [Reverse Engineering Android Apps - Native Libraries](reversing_native_libs.html)
 	* [Exercise 5](reversing_native_libs.html#exercise-5---find-the-address-of-the-native-function)
 	* [Exercise 6](reversing_native_libs.html#exercise-6---find-and-reverse-the-native-function)
+1. [Reverse Engineering Android Apps - Obfuscation](obfuscation.html)
+	* [Exercise 7](obfuscation.html#exercise-7---string-deobfuscation)
+1. [Conclusion](conclusion.html)
 
 
 
@@ -163,7 +167,7 @@ It has the type signature:
 ```
 
 ### Exercise #5 - Find the Address of the Native Function
-In Exercise #5 we're going to learn to load native libraries in a disassembler and identify the native function that is executed when a native method is called. For this particular exercise, the goal is not to reverse engineer the native method. For this exercise, we will be using the sample Mediacode.apk. This sample is available at `~/samples/Mediacode.apk` in the VM. Its SHA256 hash is a496b36cda66aaf24340941da8034bd53940d1b08d83a97f17a65ae144ebf91a.
+In Exercise #5 we're going to learn to load native libraries in a disassembler and identify the native function that is executed when a native method is called. For this particular exercise, the goal is not to reverse engineer the native method, just to find the link between the call to the native method in Java and the function that is executed in the native library. For this exercise, we will be using the sample Mediacode.apk. This sample is available at `~/samples/Mediacode.apk` in the VM. Its SHA256 hash is a496b36cda66aaf24340941da8034bd53940d1b08d83a97f17a65ae144ebf91a.
 
 #### Goal
 The goal of this exercise is to:
@@ -188,8 +192,9 @@ The goal of this exercise is to:
 1. You will see the following screen. Select "Analyze". ![Loading file into Ghidra Code Browser](images/loadingIntoGhidra.png)
 1. Using the linking information above, identify the function in the native library that is executed when the Java-declared native method is called.
 
-[//]: # TODO write answer pages for the different steps.
-*Coming Soon: Answer video*
+#### Solution
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pv8bXOW2NPA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Reversing Android Native Libraries Code - JNIEnv
 
@@ -221,6 +226,20 @@ Therefore `blx r3` on line 0x124a4 is calling `FindClass`. We can look up inform
 
 ![Screenshot of Disassembly Calling a function from JNIEnv](images/JNIcall.png) 
 
+Thankfully, there's a way to get the JNI function without doing all of this manually! In both the Ghidra and IDA Pro decompilers you can re-type the first argument in JNI functions to `JNIEnv *` type and it will automatically identify the JNI Functions being called. In IDA Pro, this work out of the box. In Ghidra, you have to load the JNI types (either the jni.h file or a Ghidra Data Types archive of the jni.h file) first. For ease, we will load the JNI types from the Ghidra Data Types archive (gdt) produced by Aryx and available [here](https://github.com/Ayrx/JNIAnalyzer/blob/master/JNIAnalyzer/data/jni_all.gdt). For ease, this file is available in the VM at `~/jni_all.gdt`.
+
+To load it for use in Ghidra, in the Data Type Manager Window, click on the down arrow in the right-hand corner and select "Open File Archive". 
+
+![Screenshot of Open File Archive Menu](images/OpenArchive.png) 
+
+Then select `jni_all.gdt` file to load. Once it's loaded, you should see jni_all in the Data Type Manager List as shown below.
+
+![Screenshot of jni_all Loaded in Data Type Manager](images/LoadedInDataTypeManager.png) 
+
+Once this is loaded in Ghidra, you can then select any argument types in the decompiler and select "Retype Variable". Set the new type to JNIEnv *. This will cause the decompiler to now show the names of the JNIFunctions called rather than the offsets from the pointer.
+
+![Screenshot of JNI Function names after the argument was Re-Typed to JNIEnv* ](images/RetypedToJNIEnv.png) 
+
 ### Exercise #6 - Find and Reverse the Native Function
 We are going to point all of our previous skills together: identifying starting points for RE, reversing DEX, and reversing native code to analyze an application that may have moved its harmful behaviors in native code. The sample is `~/samples/HDWallpaper.apk`.
 
@@ -238,10 +257,9 @@ You are a malware analyst for Android applications. You are concerned that this 
 #### Instructions
 Go on and reverse! 
 
-*Coming Soon: More Ghidra instructions & screenshots & answer/walk through video.*
-[//]: # TODO write answer pages for the different steps.
+#### Solution
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nzv9ODeijwI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-
-
+[**NEXT** > 6. Reverse Engineering Android Apps - Obfuscation](obfuscation.html)
 
