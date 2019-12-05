@@ -2,3 +2,4 @@ theme: jekyll-theme-minimal
 title: Android App Reverse Engineering 101
 description: Learn to reverse engineer Android applications!
 logo: images/pinkandroid.png
+google_analytics: UA-153918544-1
