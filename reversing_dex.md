@@ -50,6 +50,8 @@ You are a malware analyst for Android applications. You are concerned that this 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/pvgLRWxsOd0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+<br/>
+
 ## Exercise 3 - Find the Vulnerability in the Adups OTA Application
 The two exercises up until this point have focused on reverse engineering an Android app in order to determine if it is malware. Now, let's apply our reverse engineering skills to finding a vulnerability in an application. You can find the sample for this exercise in `~/samples/FotaProvider.apk`. The SHA256 digest for the sample is 6fddd183bc832659cbea0e55d08ae72016fae25a4aa3eca8156f0a9a0db7f491. 
 
@@ -75,7 +77,7 @@ Suggested Steps:
 ### Solution
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/WvJ8bDUCf4Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
+<br/>
 There is a vulnerability in that any application or component on the device can have an aribtrary command executed as the privileged system user through this application. The FotaProvider.apk sample exports the `WriteCommandReceiver` broadcast receiver through the action `android.intent.action.AdupsFota.operReceiver`. Any component on the device can send an intent with this action and with the String extra "cmd" and that "cmd" will be executed as the system user. On Android, the system UID is the most privileged UID behind root. 
 
 This vulnerability/backdoor was first identified by Kryptowire in 2016. They give a detail explanation of this command execution issue as well as other identified security issues in the Adups OTA apps in their 2017 BlackHat USA presentation, "All your SMS and Contacts Belong to Adups & Others" \[[slides](https://www.blackhat.com/docs/us-17/wednesday/us-17-Johnson-All-Your-SMS-&-Contacts-Belong-To-Adups-&-Others.pdf)\] \[[video](https://www.youtube.com/watch?v=2AL5oKdiNrs&list=PLH15HpR5qRsUyGhBVRDKGrHyQC5G4jQyd&index=46&t=6s)\].
@@ -102,7 +104,7 @@ Let's use the same context as Exercise #3, but this time the solution will look 
 ### Solution
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/CNkIX8OafF8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
+<br/>
 If you're interested in more resources on analyzing and reverse-engineering pre-installed Android applications, you can check out my Blackhat USA 2019 talk, "Securing the System: A Deep Dive into Reversing Android Pre-Installed Apps" \[[slides](https://github.com/maddiestone/ConPresentations/raw/master/Blackhat2019.SecuringTheSystem.pdf)\]. This example is covered in Case Study #1.
 
 

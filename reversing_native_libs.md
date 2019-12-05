@@ -213,7 +213,7 @@ Here are some commonly used functions (and their offsets in JNIEnv):
 
 When analyzing Android native libraries, the presence of JNIEnv means that:
 
-1. For native functions, the arguments will be shifted at least by 1 since JNIEnv* is the first argument. *Note: that for non-static native methods, the arguments will actually be shifted by two spots. The object that the native method is being called on is passed as the second argument*
+1. For JNI native functions, the arguments will be shifted by 2. The first argument is always JNIEnv*. The second argument will be the object that the function should be run on. For static native methods (they have the static keyword in the Java declaration) this will be NULL.
 2. You will often see indirect branches in the disassembly because the code is adding the offset to the JNIEnv* pointer, dereferencing to get the function pointer at that location, then branching to the function.
 
 Here is a [spreadsheet](https://docs.google.com/spreadsheets/d/1yqjFaY7mqyVIDs5jNjGLT-G8pUaRATzHWGFUgpdJRq8/edit?usp=sharing) of the C-implementation of the JNIEnv struct to know what function pointers are at the different offsets. 
@@ -260,6 +260,6 @@ Go on and reverse!
 #### Solution
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/nzv9ODeijwI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
+<br/>
 [**NEXT** > 6. Reverse Engineering Android Apps - Obfuscation](obfuscation.html)
 

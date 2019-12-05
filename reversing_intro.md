@@ -55,7 +55,8 @@ You are a malware analyst for Android applications. You are concerned that this 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/XvocjlxuccI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-There is no single right answer because the goal is to get into the habit of making deliberate choices of where to begin our reverse engineering analysis. One suggestion is to look for calls to the Android APIs that allow you to programmatically send a text message such as `sendTextMessage` or `sendMultipartMessage`. Another example could be looking for strings related to "SMS". 
+<br/>
+
 
 [**NEXT** > 4. Reverse Engineering Android Apps - DEX Bytecode](reversing_dex.html)
 

