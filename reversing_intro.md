@@ -38,7 +38,7 @@ In Exercise #1, we're going to practice coming up with the classes where we woul
 The goal of this exercise is to:
 
 1. Learn to use jadx for reverse engineering APKs
-1. Practice identifying class(es) that would be good starting points to begin your revering
+1. Practice identifying class(es) that would be good starting points to begin your reversing
 
 ### Exercise Context
 You are a malware analyst for Android applications. You are concerned that this sample maybe doing premium SMS fraud, meaning that it sends an SMS to a premium phone number without disclosure & user consent.
