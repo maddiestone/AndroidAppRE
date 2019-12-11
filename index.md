@@ -7,7 +7,7 @@ This workshop will be wholly based on reverse engineering through static analysi
 
 ## Environment
 All of the exercises in this workshop can be done in the virtual machine (VM) that is available here. 
-* [Virtual Box VM](https://drive.google.com/file/d/1yP84Rrpe42slXliVAsHQNYeXlqAJfKgO/view?usp=sharing)
+* [Virtual Box VM](https://drive.google.com/file/d/1BB6HUxra1Rf2iiEsKcdzUfNiajYvgDEQ/view?usp=sharing)
 * [.ova for VMWare](https://drive.google.com/file/d/1Og-mHwpIxX-ghxwJf_g7bS7Vt1gU9gsm/view?usp=sharing)
 
 The VM is an Ubuntu 18.04 64-bit image. The username is `AndroidAppRE` and the password is `android`. The VM has the following tools installed:
