@@ -34,6 +34,7 @@ The goal of this exercise is to: Reverse engineer our 1st Android application (D
 
 ### Exercise Context
 You are a malware analyst for Android applications. You are concerned that this sample maybe doing premium SMS fraud, meaning that it sends an SMS to a premium phone number without disclosure & user consent. In order to flag as malware, you need to determine if the Android application is:
+You are a malware analyst for Android applications. You are concerned that this sample may be doing premium SMS fraud, meaning that it sends an SMS to a premium phone number without disclosure & user consent. In order to flag as malware, you need to determine if the Android application is:
 
 1. Sending an SMS message, and 
 1. That SMS message is going to a premium number, and
